@@ -37,5 +37,18 @@
     "admission_date": "2021-06-01",
     "section": "B",
     "gender": "Male"
+  },
+  "S004": {
+    "name": "Sneha Kapoor",
+    "class": "11-A",
+    "roll_number": 7,
+    "parent": "Amit Kapoor",
+    "parent_email": "amit.k@gmail.com",
+    "email": "sneha@school.edu",
+    "phone": "+91-9876500001",
+    "dob": "2009-05-14",
+    "admission_date": "2026-06-30",
+    "section": "A",
+    "gender": "Female"
   }
 }

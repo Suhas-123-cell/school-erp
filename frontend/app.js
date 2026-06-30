@@ -109,8 +109,23 @@ function renderSessions(sessions) {
     return `<button class="session-item${active}" onclick="switchToSession('${s.session_id}')">
       <div class="session-preview">${escHtml(preview)}</div>
       <div class="session-time">${time}</div>
+      <span class="session-del" onclick="deleteSession(event,'${s.session_id}')" title="Remove">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 3h8M5 3V2h2v1M4.5 9.5l-.5-5M7.5 9.5l.5-5M3 3l.5 7h5L9 3"/></svg>
+      </span>
     </button>`;
   }).join('');
+}
+
+
+async function deleteSession(e, sid) {
+  e.stopPropagation();
+  if (!confirm('Delete this conversation?')) return;
+  try {
+    const res = await fetch(`${API}/chat/history?session_id=${sid}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error();
+    if (sid === sessionId) startNewChat();
+    loadSessions();
+  } catch (_) {}
 }
 
 async function switchToSession(id) {
@@ -318,3 +333,132 @@ function formatTime(iso) {
     return d.toLocaleDateString([], { month: 'short', day: 'numeric' });
   } catch (_) { return iso.slice(0, 10); }
 }
+
+// ── Students modal ────────────────────────────────────────────────────────
+document.getElementById('studentsBtn').addEventListener('click', openStudents);
+
+function openStudents() {
+  document.getElementById('modalOverlay').classList.add('open');
+  fetchAndRenderStudentCards();
+}
+
+function closeStudents() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.getElementById('formMsg').textContent = '';
+  document.getElementById('studentForm').reset();
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeStudents();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeStudents();
+});
+
+async function fetchAndRenderStudentCards() {
+  const container = document.getElementById('studentCards');
+  const sub = document.getElementById('modalSub');
+  try {
+    const res = await fetch(`${API}/students`);
+    const students = await res.json();
+    sub.textContent = `${students.length} student${students.length !== 1 ? 's' : ''} enrolled`;
+    container.innerHTML = students.map(s => `
+      <div class="s-card" id="sc-${s.student_id}">
+        <div class="s-card-avatar">${s.name.charAt(0)}</div>
+        <div class="s-card-info">
+          <div class="s-card-name">${escHtml(s.name)}</div>
+          <div class="s-card-meta">Class ${escHtml(s.class || '')} · Roll ${s.roll_number}</div>
+        </div>
+        <div class="s-card-id">${s.student_id}</div>
+      </div>
+    `).join('');
+
+    // Also refresh the chat dropdown
+    refreshChatDropdown(students);
+  } catch (err) {
+    container.innerHTML = `<div class="card-loading" style="color:var(--red)">Failed to load</div>`;
+  }
+}
+
+function refreshChatDropdown(students) {
+  const sel = document.getElementById('studentSelect');
+  const current = sel.value;
+  sel.innerHTML = students.map(s =>
+    `<option value="${s.student_id}">${s.student_id} — ${escHtml(s.name)}</option>`
+  ).join('');
+  sel.value = current;
+  // Update STUDENTS lookup
+  students.forEach(s => {
+    STUDENTS[s.student_id] = {
+      name: s.name,
+      cls: s.class || '',
+      roll: s.roll_number,
+      initial: s.name.charAt(0),
+    };
+  });
+}
+
+document.getElementById('studentForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = e.target.querySelector('.submit-btn');
+  const msg = document.getElementById('formMsg');
+  const fd = new FormData(e.target);
+  const payload = Object.fromEntries(fd.entries());
+  payload.roll_number = parseInt(payload.roll_number, 10);
+
+  btn.disabled = true;
+  btn.textContent = 'Adding…';
+  msg.className = 'form-msg';
+  msg.textContent = '';
+
+  try {
+    const res = await fetch(`${API}/students`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Failed to add student');
+
+    msg.className = 'form-msg success';
+    msg.textContent = `✓ ${data.name} added as ${data.student_id}`;
+    e.target.reset();
+
+    // Prepend new card with animation
+    const container = document.getElementById('studentCards');
+    const card = document.createElement('div');
+    card.className = 's-card';
+    card.id = `sc-${data.student_id}`;
+    card.innerHTML = `
+      <div class="s-card-avatar new">${data.name.charAt(0)}</div>
+      <div class="s-card-info">
+        <div class="s-card-name">${escHtml(data.name)}</div>
+        <div class="s-card-meta">Class ${escHtml(data.class || '')} · Roll ${data.roll_number}</div>
+      </div>
+      <div class="s-card-id">${data.student_id}</div>
+    `;
+    container.prepend(card);
+
+    const sub = document.getElementById('modalSub');
+    const count = container.querySelectorAll('.s-card').length;
+    sub.textContent = `${count} student${count !== 1 ? 's' : ''} enrolled`;
+
+    STUDENTS[data.student_id] = {
+      name: data.name, cls: data.class || '',
+      roll: data.roll_number, initial: data.name.charAt(0),
+    };
+    const sel = document.getElementById('studentSelect');
+    const opt = document.createElement('option');
+    opt.value = data.student_id;
+    opt.textContent = `${data.student_id} — ${data.name}`;
+    sel.appendChild(opt);
+
+  } catch (err) {
+    msg.className = 'form-msg error';
+    msg.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Add Student';
+  }
+});

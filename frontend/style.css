@@ -640,3 +640,281 @@ html, body {
   color: var(--text-3);
   line-height: 1;
 }
+
+/* ── Students button ────────────────────────────────────────────────────── */
+.students-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 7px 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-2);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.students-btn:hover {
+  background: var(--accent-pale);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Modal overlay ──────────────────────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(2px);
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--surface);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 860px;
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 22px 24px 16px;
+  border-bottom: 1px solid var(--border-sub);
+  flex-shrink: 0;
+}
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.modal-sub {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+.modal-close {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition);
+}
+.modal-close:hover { background: var(--bg); color: var(--text); }
+
+/* Modal body */
+.modal-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Left — student list */
+.modal-left {
+  width: 260px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-sub);
+  padding: 16px;
+  overflow-y: auto;
+  background: var(--sidebar-bg);
+}
+.modal-left::-webkit-scrollbar { width: 4px; }
+.modal-left::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.modal-section-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+
+.student-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.card-loading {
+  font-size: 12px;
+  color: var(--text-3);
+  padding: 4px 0;
+}
+
+.s-card {
+  padding: 10px 12px;
+  border: 1px solid var(--border-sub);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color var(--transition);
+}
+.s-card:hover { border-color: var(--accent); }
+
+.s-card-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.s-card-avatar.new { background: var(--accent-light); animation: pop 0.3s ease; }
+
+@keyframes pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.s-card-info { flex: 1; min-width: 0; }
+.s-card-name {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.s-card-meta {
+  font-size: 10.5px;
+  color: var(--text-3);
+  margin-top: 1px;
+}
+.s-card-id {
+  font-size: 10px;
+  font-family: var(--mono);
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+/* Right — form */
+.modal-right {
+  flex: 1;
+  padding: 16px 24px 20px;
+  overflow-y: auto;
+}
+.modal-right::-webkit-scrollbar { width: 4px; }
+.modal-right::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.form-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.field { flex: 1; min-width: 0; }
+.field-full { flex: 1 1 100%; }
+
+.field-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-2);
+  margin-bottom: 5px;
+  letter-spacing: 0.01em;
+}
+.req { color: var(--accent); }
+
+.field-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  appearance: none;
+}
+.field-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-pale);
+  background: var(--surface);
+}
+.field-input::placeholder { color: var(--text-3); }
+select.field-input {
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23A09D99' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+  cursor: pointer;
+}
+input[type="date"].field-input { cursor: pointer; }
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-sub);
+  gap: 12px;
+}
+.form-msg {
+  font-size: 12px;
+  flex: 1;
+  line-height: 1.4;
+}
+.form-msg.success { color: var(--accent); }
+.form-msg.error { color: var(--red); }
+
+.submit-btn {
+  padding: 9px 22px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition), transform 80ms ease;
+}
+.submit-btn:hover { background: var(--accent-light); }
+.submit-btn:active { transform: scale(0.97); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.session-item { position: relative; }
+.session-item:hover .session-del { opacity: 1; }
+.session-del {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 20px; height: 20px; border: none; background: none; color: var(--text-3);
+  cursor: pointer; border-radius: 4px; display: flex; align-items: center;
+  justify-content: center; opacity: 0; padding: 0; flex-shrink: 0;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+}
+.session-del:hover { background: #fde8e8; color: var(--red); }

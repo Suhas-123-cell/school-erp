@@ -101,5 +101,12 @@ def get_all_sessions(student_id: Optional[str] = None) -> List[Dict[str, Any]]:
     return [dict(r) for r in rows]
 
 
+def delete_session(session_id: str) -> int:
+    with _get_conn() as conn:
+        cur = conn.execute("DELETE FROM conversations WHERE session_id = ?", (session_id,))
+        conn.commit()
+        return cur.rowcount
+
+
 def generate_session_id() -> str:
     return str(uuid.uuid4())
