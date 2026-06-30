@@ -292,8 +292,8 @@ def run_agent(
         for tc in msg.tool_calls:
             tool_name = tc.function.name
             try:
-                args = json.loads(tc.function.arguments)
-            except json.JSONDecodeError:
+                args = json.loads(tc.function.arguments) or {}
+            except (json.JSONDecodeError, TypeError):
                 args = {}
 
             logger.info(f"Calling tool: {tool_name} args={args} student={student_id}")
