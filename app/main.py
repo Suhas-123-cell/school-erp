@@ -1,9 +1,11 @@
 import os
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -47,19 +49,9 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
-@app.get("/", tags=["Health"])
-async def root():
-    return {
-        "name": "AI School ERP Assistant",
-        "version": "1.0.0",
-        "status": "running",
-        "endpoints": {
-            "chat": "POST /chat",
-            "history": "GET /chat/history?session_id=<id>",
-            "sessions": "GET /chat/sessions",
-            "docs": "GET /docs",
-        },
-    }
+@app.get("/", tags=["Frontend"], include_in_schema=False)
+async def serve_frontend():
+    return FileResponse(Path("frontend/index.html"))
 
 
 @app.get("/health", tags=["Health"])
@@ -68,3 +60,5 @@ async def health():
 
 
 app.include_router(chat_router)
+
+app.mount("/", StaticFiles(directory="frontend"), name="static")

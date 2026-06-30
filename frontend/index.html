@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School ERP</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%231A6845'/><text y='22' x='8' font-size='18' fill='white'>E</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">
+          <span class="brand-dot"></span>
+          <span class="brand-name">ERP Assistant</span>
+        </div>
+        <button class="new-chat-btn" id="newChatBtn" title="New conversation">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 1v12M1 7h12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="student-card">
+          <div class="student-avatar" id="studentAvatar">A</div>
+          <div class="student-info">
+            <div class="student-name" id="studentName">Arjun Sharma</div>
+            <div class="student-meta" id="studentMeta">Class 10-A &nbsp;·&nbsp; Roll 12</div>
+          </div>
+        </div>
+        <select class="student-select" id="studentSelect">
+          <option value="S001">S001 — Arjun Sharma</option>
+          <option value="S002">S002 — Priya Nair</option>
+          <option value="S003">S003 — Rohan Mehta</option>
+        </select>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Quick queries</div>
+        <div class="quick-list" id="quickList">
+          <button class="quick-item" data-q="What is my attendance this month?">
+            <span class="quick-icon">📅</span>
+            <span>Attendance this month</span>
+          </button>
+          <button class="quick-item" data-q="Show all my subject marks.">
+            <span class="quick-icon">📊</span>
+            <span>Subject marks</span>
+          </button>
+          <button class="quick-item" data-q="Show my pending fees.">
+            <span class="quick-icon">💳</span>
+            <span>Fee status</span>
+          </button>
+          <button class="quick-item" data-q="What homework is pending?">
+            <span class="quick-icon">📝</span>
+            <span>Pending homework</span>
+          </button>
+          <button class="quick-item" data-q="Show today's timetable.">
+            <span class="quick-icon">🗓</span>
+            <span>Today's timetable</span>
+          </button>
+          <button class="quick-item" data-q="Summarize my academic performance this semester.">
+            <span class="quick-icon">📈</span>
+            <span>Academic summary</span>
+          </button>
+          <button class="quick-item" data-q="Can I still achieve 90% attendance this semester?">
+            <span class="quick-icon">🎯</span>
+            <span>Attendance goal</span>
+          </button>
+          <button class="quick-item" data-q="How can I improve my grades?">
+            <span class="quick-icon">💡</span>
+            <span>Study recommendations</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="session-info" id="sessionInfo">No active session</div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+      <!-- Chat messages -->
+      <div class="messages-wrap" id="messagesWrap">
+        <div class="messages" id="messages">
+
+          <!-- Empty state -->
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M28 20c0 1.1-.9 2-2 2H8l-6 6V6c0-1.1.9-2 2-2h22c1.1 0 2 .9 2 2v14z"/>
+              </svg>
+            </div>
+            <h2 class="empty-title">What can I help with?</h2>
+            <p class="empty-sub">Ask about attendance, marks, fees, homework, or timetable — or pick a suggestion on the left.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Input area -->
+      <div class="input-area">
+        <div class="input-wrap">
+          <textarea
+            class="chat-input"
+            id="chatInput"
+            placeholder="Ask about attendance, marks, fees…"
+            rows="1"
+            autocomplete="off"
+            spellcheck="true"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" disabled title="Send">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </button>
+        </div>
+        <div class="input-hint">Press <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line</div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
