@@ -140,6 +140,14 @@ async def get_history(
     )
 
 
+@router.delete("/history", status_code=200)
+async def delete_history(session_id: str = Query(...)):
+    deleted = mem.delete_session(session_id)
+    if deleted == 0:
+        raise HTTPException(status_code=404, detail=f"No history for session {session_id}")
+    return {"deleted": deleted, "session_id": session_id}
+
+
 @router.get("/sessions")
 async def list_sessions(student_id: Optional[str] = Query(None)):
     sessions = mem.get_all_sessions(student_id=student_id)
