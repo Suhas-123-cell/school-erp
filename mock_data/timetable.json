@@ -1,0 +1,364 @@
+{
+  "10-A": {
+    "Monday": [
+      {
+        "period": 1,
+        "time": "08:00-08:45",
+        "subject": "Mathematics",
+        "teacher": "Mr. Arun Kumar",
+        "room": "101"
+      },
+      {
+        "period": 2,
+        "time": "08:45-09:30",
+        "subject": "Physics",
+        "teacher": "Mrs. Sunita Verma",
+        "room": "Lab-1"
+      },
+      {
+        "period": 3,
+        "time": "09:30-10:15",
+        "subject": "English",
+        "teacher": "Ms. Anita Joseph",
+        "room": "101"
+      },
+      {
+        "period": "Break",
+        "time": "10:15-10:30",
+        "subject": "Short Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 4,
+        "time": "10:30-11:15",
+        "subject": "Chemistry",
+        "teacher": "Dr. Ramesh Patel",
+        "room": "Lab-2"
+      },
+      {
+        "period": 5,
+        "time": "11:15-12:00",
+        "subject": "History",
+        "teacher": "Mr. Vijay Singh",
+        "room": "101"
+      },
+      {
+        "period": "Lunch",
+        "time": "12:00-12:45",
+        "subject": "Lunch Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 6,
+        "time": "12:45-13:30",
+        "subject": "Computer Science",
+        "teacher": "Ms. Deepa Krishnan",
+        "room": "CS-Lab"
+      },
+      {
+        "period": 7,
+        "time": "13:30-14:15",
+        "subject": "Mathematics",
+        "teacher": "Mr. Arun Kumar",
+        "room": "101"
+      },
+      {
+        "period": 8,
+        "time": "14:15-15:00",
+        "subject": "Sports/PT",
+        "teacher": "Mr. Rajan",
+        "room": "Ground"
+      }
+    ],
+    "Tuesday": [
+      {
+        "period": 1,
+        "time": "08:00-08:45",
+        "subject": "Physics",
+        "teacher": "Mrs. Sunita Verma",
+        "room": "Lab-1"
+      },
+      {
+        "period": 2,
+        "time": "08:45-09:30",
+        "subject": "Mathematics",
+        "teacher": "Mr. Arun Kumar",
+        "room": "101"
+      },
+      {
+        "period": 3,
+        "time": "09:30-10:15",
+        "subject": "Chemistry",
+        "teacher": "Dr. Ramesh Patel",
+        "room": "Lab-2"
+      },
+      {
+        "period": "Break",
+        "time": "10:15-10:30",
+        "subject": "Short Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 4,
+        "time": "10:30-11:15",
+        "subject": "English",
+        "teacher": "Ms. Anita Joseph",
+        "room": "101"
+      },
+      {
+        "period": 5,
+        "time": "11:15-12:00",
+        "subject": "Computer Science",
+        "teacher": "Ms. Deepa Krishnan",
+        "room": "CS-Lab"
+      },
+      {
+        "period": "Lunch",
+        "time": "12:00-12:45",
+        "subject": "Lunch Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 6,
+        "time": "12:45-13:30",
+        "subject": "History",
+        "teacher": "Mr. Vijay Singh",
+        "room": "101"
+      },
+      {
+        "period": 7,
+        "time": "13:30-14:15",
+        "subject": "Physics",
+        "teacher": "Mrs. Sunita Verma",
+        "room": "Lab-1"
+      },
+      {
+        "period": 8,
+        "time": "14:15-15:00",
+        "subject": "Library",
+        "teacher": "Ms. Lakshmi",
+        "room": "Library"
+      }
+    ],
+    "Wednesday": [
+      {
+        "period": 1,
+        "time": "08:00-08:45",
+        "subject": "Chemistry",
+        "teacher": "Dr. Ramesh Patel",
+        "room": "Lab-2"
+      },
+      {
+        "period": 2,
+        "time": "08:45-09:30",
+        "subject": "English",
+        "teacher": "Ms. Anita Joseph",
+        "room": "101"
+      },
+      {
+        "period": 3,
+        "time": "09:30-10:15",
+        "subject": "Mathematics",
+        "teacher": "Mr. Arun Kumar",
+        "room": "101"
+      },
+      {
+        "period": "Break",
+        "time": "10:15-10:30",
+        "subject": "Short Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 4,
+        "time": "10:30-11:15",
+        "subject": "History",
+        "teacher": "Mr. Vijay Singh",
+        "room": "101"
+      },
+      {
+        "period": 5,
+        "time": "11:15-12:00",
+        "subject": "Computer Science",
+        "teacher": "Ms. Deepa Krishnan",
+        "room": "CS-Lab"
+      },
+      {
+        "period": "Lunch",
+        "time": "12:00-12:45",
+        "subject": "Lunch Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 6,
+        "time": "12:45-13:30",
+        "subject": "Physics",
+        "teacher": "Mrs. Sunita Verma",
+        "room": "Lab-1"
+      },
+      {
+        "period": 7,
+        "time": "13:30-14:15",
+        "subject": "Mathematics",
+        "teacher": "Mr. Arun Kumar",
+        "room": "101"
+      },
+      {
+        "period": 8,
+        "time": "14:15-15:00",
+        "subject": "Art/Music",
+        "teacher": "Ms. Preeti",
+        "room": "Art-Room"
+      }
+    ],
+    "Thursday": [
+      {
+        "period": 1,
+        "time": "08:00-08:45",
+        "subject": "English",
+        "teacher": "Ms. Anita Joseph",
+        "room": "101"
+      },
+      {
+        "period": 2,
+        "time": "08:45-09:30",
+        "subject": "History",
+        "teacher": "Mr. Vijay Singh",
+        "room": "101"
+      },
+      {
+        "period": 3,
+        "time": "09:30-10:15",
+        "subject": "Physics",
+        "teacher": "Mrs. Sunita Verma",
+        "room": "Lab-1"
+      },
+      {
+        "period": "Break",
+        "time": "10:15-10:30",
+        "subject": "Short Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 4,
+        "time": "10:30-11:15",
+        "subject": "Mathematics",
+        "teacher": "Mr. Arun Kumar",
+        "room": "101"
+      },
+      {
+        "period": 5,
+        "time": "11:15-12:00",
+        "subject": "Chemistry",
+        "teacher": "Dr. Ramesh Patel",
+        "room": "Lab-2"
+      },
+      {
+        "period": "Lunch",
+        "time": "12:00-12:45",
+        "subject": "Lunch Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 6,
+        "time": "12:45-13:30",
+        "subject": "Computer Science",
+        "teacher": "Ms. Deepa Krishnan",
+        "room": "CS-Lab"
+      },
+      {
+        "period": 7,
+        "time": "13:30-14:15",
+        "subject": "English",
+        "teacher": "Ms. Anita Joseph",
+        "room": "101"
+      },
+      {
+        "period": 8,
+        "time": "14:15-15:00",
+        "subject": "Sports/PT",
+        "teacher": "Mr. Rajan",
+        "room": "Ground"
+      }
+    ],
+    "Friday": [
+      {
+        "period": 1,
+        "time": "08:00-08:45",
+        "subject": "Computer Science",
+        "teacher": "Ms. Deepa Krishnan",
+        "room": "CS-Lab"
+      },
+      {
+        "period": 2,
+        "time": "08:45-09:30",
+        "subject": "Chemistry",
+        "teacher": "Dr. Ramesh Patel",
+        "room": "Lab-2"
+      },
+      {
+        "period": 3,
+        "time": "09:30-10:15",
+        "subject": "History",
+        "teacher": "Mr. Vijay Singh",
+        "room": "101"
+      },
+      {
+        "period": "Break",
+        "time": "10:15-10:30",
+        "subject": "Short Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 4,
+        "time": "10:30-11:15",
+        "subject": "Physics",
+        "teacher": "Mrs. Sunita Verma",
+        "room": "Lab-1"
+      },
+      {
+        "period": 5,
+        "time": "11:15-12:00",
+        "subject": "English",
+        "teacher": "Ms. Anita Joseph",
+        "room": "101"
+      },
+      {
+        "period": "Lunch",
+        "time": "12:00-12:45",
+        "subject": "Lunch Break",
+        "teacher": null,
+        "room": null
+      },
+      {
+        "period": 6,
+        "time": "12:45-13:30",
+        "subject": "Mathematics",
+        "teacher": "Mr. Arun Kumar",
+        "room": "101"
+      },
+      {
+        "period": 7,
+        "time": "13:30-14:15",
+        "subject": "Chemistry",
+        "teacher": "Dr. Ramesh Patel",
+        "room": "Lab-2"
+      },
+      {
+        "period": 8,
+        "time": "14:15-15:00",
+        "subject": "Assembly/Club",
+        "teacher": "Staff",
+        "room": "Hall"
+      }
+    ]
+  }
+}

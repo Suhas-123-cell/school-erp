@@ -1,0 +1,361 @@
+{
+  "S001": {
+    "name": "Arjun Sharma",
+    "class": "10-A",
+    "overall": {
+      "total_classes": 110,
+      "attended": 96,
+      "percentage": 87.27
+    },
+    "monthly": {
+      "2026-06": [
+        {
+          "date": "2026-06-01",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-02",
+          "status": "present",
+          "day": "Tuesday"
+        },
+        {
+          "date": "2026-06-03",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-06-04",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-06-05",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-06-08",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-09",
+          "status": "absent",
+          "day": "Tuesday",
+          "reason": "Sick"
+        },
+        {
+          "date": "2026-06-10",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-06-11",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-06-12",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-06-15",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-16",
+          "status": "absent",
+          "day": "Tuesday",
+          "reason": "Family function"
+        },
+        {
+          "date": "2026-06-17",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-06-18",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-06-19",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-06-22",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-23",
+          "status": "absent",
+          "day": "Tuesday",
+          "reason": "Medical appointment"
+        },
+        {
+          "date": "2026-06-24",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-06-25",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-06-26",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-06-29",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-30",
+          "status": "present",
+          "day": "Tuesday"
+        }
+      ],
+      "2026-05": [
+        {
+          "date": "2026-05-01",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-05-04",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-05-05",
+          "status": "absent",
+          "day": "Tuesday",
+          "reason": "Sick"
+        },
+        {
+          "date": "2026-05-06",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-05-07",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-05-08",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-05-11",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-05-12",
+          "status": "present",
+          "day": "Tuesday"
+        },
+        {
+          "date": "2026-05-13",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-05-14",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-05-15",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-05-18",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-05-19",
+          "status": "present",
+          "day": "Tuesday"
+        },
+        {
+          "date": "2026-05-20",
+          "status": "absent",
+          "day": "Wednesday",
+          "reason": "Sports event"
+        },
+        {
+          "date": "2026-05-21",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-05-22",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-05-25",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-05-26",
+          "status": "present",
+          "day": "Tuesday"
+        },
+        {
+          "date": "2026-05-27",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-05-28",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-05-29",
+          "status": "present",
+          "day": "Friday"
+        }
+      ]
+    }
+  },
+  "S002": {
+    "name": "Priya Nair",
+    "class": "10-A",
+    "overall": {
+      "total_classes": 110,
+      "attended": 105,
+      "percentage": 95.45
+    },
+    "monthly": {
+      "2026-06": [
+        {
+          "date": "2026-06-01",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-02",
+          "status": "present",
+          "day": "Tuesday"
+        },
+        {
+          "date": "2026-06-03",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-06-04",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-06-05",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-06-08",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-09",
+          "status": "present",
+          "day": "Tuesday"
+        },
+        {
+          "date": "2026-06-10",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-06-11",
+          "status": "absent",
+          "day": "Thursday",
+          "reason": "Medical"
+        },
+        {
+          "date": "2026-06-12",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-06-15",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-16",
+          "status": "present",
+          "day": "Tuesday"
+        },
+        {
+          "date": "2026-06-17",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-06-18",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-06-19",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-06-22",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-23",
+          "status": "present",
+          "day": "Tuesday"
+        },
+        {
+          "date": "2026-06-24",
+          "status": "present",
+          "day": "Wednesday"
+        },
+        {
+          "date": "2026-06-25",
+          "status": "present",
+          "day": "Thursday"
+        },
+        {
+          "date": "2026-06-26",
+          "status": "present",
+          "day": "Friday"
+        },
+        {
+          "date": "2026-06-29",
+          "status": "present",
+          "day": "Monday"
+        },
+        {
+          "date": "2026-06-30",
+          "status": "present",
+          "day": "Tuesday"
+        }
+      ]
+    }
+  }
+}
