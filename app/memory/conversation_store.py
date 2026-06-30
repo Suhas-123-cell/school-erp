@@ -77,21 +77,26 @@ def get_openai_messages(session_id: str, limit: int = 10) -> List[Dict[str, str]
 
 
 def get_all_sessions(student_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    preview_sql = """(SELECT content FROM conversations
+                        WHERE session_id = c.session_id AND role = 'user'
+                        ORDER BY id ASC LIMIT 1) as first_message"""
     with _get_conn() as conn:
         if student_id:
             rows = conn.execute(
-                """SELECT session_id, student_id, COUNT(*) as msg_count,
-                          MIN(created_at) as started_at, MAX(created_at) as last_at
-                   FROM conversations WHERE student_id = ?
-                   GROUP BY session_id ORDER BY last_at DESC""",
+                f"""SELECT c.session_id, c.student_id, COUNT(*) as msg_count,
+                          MIN(c.created_at) as started_at, MAX(c.created_at) as last_at,
+                          {preview_sql}
+                   FROM conversations c WHERE c.student_id = ?
+                   GROUP BY c.session_id ORDER BY last_at DESC LIMIT 30""",
                 (student_id,),
             ).fetchall()
         else:
             rows = conn.execute(
-                """SELECT session_id, student_id, COUNT(*) as msg_count,
-                          MIN(created_at) as started_at, MAX(created_at) as last_at
-                   FROM conversations
-                   GROUP BY session_id ORDER BY last_at DESC"""
+                f"""SELECT c.session_id, c.student_id, COUNT(*) as msg_count,
+                          MIN(c.created_at) as started_at, MAX(c.created_at) as last_at,
+                          {preview_sql}
+                   FROM conversations c
+                   GROUP BY c.session_id ORDER BY last_at DESC LIMIT 30"""
             ).fetchall()
     return [dict(r) for r in rows]
 

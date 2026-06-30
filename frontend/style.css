@@ -584,3 +584,59 @@ html, body {
   .messages { padding: 24px 16px 12px; }
   .input-area { padding: 8px 16px 14px; }
 }
+
+/* ── Session history list ───────────────────────────────────────────────── */
+.sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.sessions-list::-webkit-scrollbar { width: 3px; }
+.sessions-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.sessions-empty {
+  font-size: 11.5px;
+  color: var(--text-3);
+  padding: 6px 4px;
+}
+
+.session-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  text-align: left;
+  width: 100%;
+  transition: background var(--transition);
+}
+
+.session-item:hover { background: var(--bg); }
+
+.session-item.active {
+  background: var(--accent-pale);
+}
+
+.session-item.active .session-preview { color: var(--accent-text); }
+.session-item.active .session-time { color: var(--accent); }
+
+.session-preview {
+  font-size: 12px;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.session-time {
+  font-size: 10px;
+  color: var(--text-3);
+  line-height: 1;
+}

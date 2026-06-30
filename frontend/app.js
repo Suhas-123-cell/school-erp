@@ -1,7 +1,7 @@
 // ── Config ────────────────────────────────────────────────────────────────
-const API = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
-  ? window.location.origin.replace(/:\d+$/, ':8000')
-  : window.location.origin;
+const API = (window.location.port === '8000' || window.location.port === '')
+  ? window.location.origin
+  : window.location.origin.replace(/:\d+$/, ':8000');
 
 const STUDENTS = {
   S001: { name: 'Arjun Sharma', cls: '10-A', roll: 12, initial: 'A' },
@@ -15,25 +15,24 @@ let studentId = localStorage.getItem('erp_student') || 'S001';
 let isLoading = false;
 
 // ── DOM refs ───────────────────────────────────────────────────────────────
-const messagesEl  = document.getElementById('messages');
-const inputEl     = document.getElementById('chatInput');
-const sendBtn     = document.getElementById('sendBtn');
-const emptyState  = document.getElementById('emptyState');
-const sessionInfo = document.getElementById('sessionInfo');
-const studentSel  = document.getElementById('studentSelect');
-const newChatBtn  = document.getElementById('newChatBtn');
+const messagesEl   = document.getElementById('messages');
+const inputEl      = document.getElementById('chatInput');
+const sendBtn      = document.getElementById('sendBtn');
+const emptyState   = document.getElementById('emptyState');
+const sessionInfo  = document.getElementById('sessionInfo');
+const studentSel   = document.getElementById('studentSelect');
+const newChatBtn   = document.getElementById('newChatBtn');
+const sessionsEl   = document.getElementById('sessionsList');
 
 // ── Init ──────────────────────────────────────────────────────────────────
 (function init() {
   studentSel.value = studentId;
   updateStudentUI(studentId);
   updateSessionUI();
+  loadSessions();
 
-  if (sessionId) {
-    loadHistory();
-  }
+  if (sessionId) loadHistory(sessionId);
 
-  // auto-resize textarea
   inputEl.addEventListener('input', () => {
     inputEl.style.height = 'auto';
     inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
@@ -56,16 +55,17 @@ const newChatBtn  = document.getElementById('newChatBtn');
     localStorage.setItem('erp_student', studentId);
     updateStudentUI(studentId);
     startNewChat();
+    loadSessions();
   });
 
-  newChatBtn.addEventListener('click', startNewChat);
+  newChatBtn.addEventListener('click', () => {
+    startNewChat();
+  });
 
   document.querySelectorAll('.quick-item').forEach(btn => {
     btn.addEventListener('click', () => {
-      const q = btn.dataset.q;
-      inputEl.value = q;
+      inputEl.value = btn.dataset.q;
       inputEl.dispatchEvent(new Event('input'));
-      inputEl.focus();
       sendMessage();
     });
   });
@@ -81,36 +81,98 @@ function updateStudentUI(id) {
 
 function updateSessionUI() {
   sessionInfo.textContent = sessionId
-    ? `Session: ${sessionId.slice(0, 8)}…`
+    ? `Session · ${sessionId.slice(0, 8)}…`
     : 'No active session';
+}
+
+// ── Session list ──────────────────────────────────────────────────────────
+async function loadSessions() {
+  try {
+    const res = await fetch(`${API}/chat/sessions?student_id=${studentId}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    renderSessions(data.sessions || []);
+  } catch (_) {}
+}
+
+function renderSessions(sessions) {
+  if (!sessions.length) {
+    sessionsEl.innerHTML = '<div class="sessions-empty">No history yet</div>';
+    return;
+  }
+  sessionsEl.innerHTML = sessions.map(s => {
+    const preview = s.first_message
+      ? s.first_message.slice(0, 42) + (s.first_message.length > 42 ? '…' : '')
+      : 'Conversation';
+    const time = formatTime(s.last_at);
+    const active = s.session_id === sessionId ? ' active' : '';
+    return `<button class="session-item${active}" onclick="switchToSession('${s.session_id}')">
+      <div class="session-preview">${escHtml(preview)}</div>
+      <div class="session-time">${time}</div>
+    </button>`;
+  }).join('');
+}
+
+async function switchToSession(id) {
+  if (id === sessionId) return;
+  sessionId = id;
+  localStorage.setItem('erp_session', id);
+  updateSessionUI();
+  clearMessages();
+  await loadHistory(id);
+  renderSessions(await fetchSessions());
+}
+
+async function fetchSessions() {
+  try {
+    const res = await fetch(`${API}/chat/sessions?student_id=${studentId}`);
+    if (!res.ok) return [];
+    return (await res.json()).sessions || [];
+  } catch (_) { return []; }
 }
 
 function startNewChat() {
   sessionId = null;
   localStorage.removeItem('erp_session');
   updateSessionUI();
-  messagesEl.innerHTML = '';
-  messagesEl.appendChild(emptyState);
-  emptyState.style.display = 'flex';
+  clearMessages();
+  renderSessions(Array.from(sessionsEl.querySelectorAll('.session-item')).map(el => ({
+    session_id: el.getAttribute('onclick').match(/'([^']+)'/)[1],
+    first_message: el.querySelector('.session-preview').textContent,
+    last_at: el.querySelector('.session-time').textContent,
+    student_id: studentId,
+  })));
 }
 
-// ── History ───────────────────────────────────────────────────────────────
-async function loadHistory() {
+function clearMessages() {
+  messagesEl.innerHTML = '';
+  messagesEl.appendChild(emptyState);
+  emptyState.style.display = '';
+}
+
+// ── History load ──────────────────────────────────────────────────────────
+async function loadHistory(sid) {
   try {
-    const res = await fetch(`${API}/chat/history?session_id=${sessionId}`);
-    if (!res.ok) { sessionId = null; updateSessionUI(); return; }
-    const data = await res.json();
-    if (data.messages && data.messages.length > 0) {
-      emptyState.style.display = 'none';
-      data.messages.forEach(m => {
-        if (m.role === 'user') appendUserMsg(m.content);
-        else if (m.role === 'assistant') appendAIMsg(m.content, {
-          intent: m.intent,
-          tools: m.tools_used,
-        });
-      });
-      scrollToBottom();
+    const res = await fetch(`${API}/chat/history?session_id=${sid}`);
+    if (!res.ok) {
+      if (res.status === 404) {
+        sessionId = null;
+        localStorage.removeItem('erp_session');
+        updateSessionUI();
+      }
+      return;
     }
+    const data = await res.json();
+    if (!data.messages || data.messages.length === 0) return;
+    emptyState.style.display = 'none';
+    data.messages.forEach(m => {
+      if (m.role === 'user') appendUserMsg(m.content);
+      else if (m.role === 'assistant') appendAIMsg(m.content, {
+        intent: m.intent,
+        tools: m.tools_used,
+      });
+    });
+    scrollToBottom();
   } catch (_) {}
 }
 
@@ -154,9 +216,11 @@ async function sendMessage() {
       time: data.execution_time_ms,
     });
 
+    loadSessions();
+
   } catch (err) {
     loadingEl.remove();
-    appendErrorMsg(err.message || 'Could not reach the ERP server. Is it running on port 8000?');
+    appendErrorMsg(err.message || 'Could not reach the ERP server.');
   } finally {
     isLoading = false;
     sendBtn.disabled = inputEl.value.trim().length === 0;
@@ -181,20 +245,11 @@ function appendAIMsg(text, meta = {}) {
     : escHtml(text || '').replace(/\n/g, '<br>');
 
   let metaHtml = '';
-  if (meta.intent) {
-    metaHtml += `<span class="meta-intent">${escHtml(meta.intent)}</span>`;
-  }
-  if (meta.tools && meta.tools.length) {
-    meta.tools.forEach(t => {
-      metaHtml += `<span class="meta-tool">${escHtml(t)}</span>`;
-    });
-  }
-  if (meta.plan) {
-    metaHtml += `<button class="plan-toggle" onclick="togglePlan(this)">show plan</button>`;
-  }
-  if (meta.time != null) {
-    metaHtml += `<span class="meta-time">${meta.time.toFixed(0)} ms</span>`;
-  }
+  if (meta.intent) metaHtml += `<span class="meta-intent">${escHtml(meta.intent)}</span>`;
+  if (meta.tools && meta.tools.length)
+    meta.tools.forEach(t => { metaHtml += `<span class="meta-tool">${escHtml(t)}</span>`; });
+  if (meta.plan) metaHtml += `<button class="plan-toggle" onclick="togglePlan(this)">show plan</button>`;
+  if (meta.time != null) metaHtml += `<span class="meta-time">${meta.time.toFixed(0)} ms</span>`;
 
   row.innerHTML = `
     <div class="msg-sender">ERP Assistant</div>
@@ -242,13 +297,24 @@ function el(tag, cls) {
 
 function escHtml(str) {
   return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function scrollToBottom() {
   const wrap = document.getElementById('messagesWrap');
   requestAnimationFrame(() => { wrap.scrollTop = wrap.scrollHeight; });
+}
+
+function formatTime(iso) {
+  if (!iso) return '';
+  try {
+    const d = new Date(iso.endsWith('Z') ? iso : iso + 'Z');
+    const now = new Date();
+    const diffDays = Math.floor((now - d) / 86400000);
+    if (diffDays === 0) return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return d.toLocaleDateString([], { weekday: 'short' });
+    return d.toLocaleDateString([], { month: 'short', day: 'numeric' });
+  } catch (_) { return iso.slice(0, 10); }
 }
