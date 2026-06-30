@@ -14,6 +14,7 @@ from app.tools.marks_tool import get_marks
 from app.tools.fees_tool import get_fees
 from app.tools.homework_tool import get_homework
 from app.tools.timetable_tool import get_timetable
+from app.tools.exam_planner_tool import get_exam_plan
 from app.tools.analytics_tool import (
     get_academic_summary,
     get_recommendations,
@@ -160,6 +161,23 @@ TOOL_SCHEMAS = [
             "parameters": {"type": "object", "properties": {}, "required": []},
         },
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_exam_plan",
+            "description": "Generate a personalised day-by-day exam study plan. Use for queries like 'My exams start in X days, create a study plan' or 'Help me prepare for exams'.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "days_until_exam": {
+                        "type": "integer",
+                        "description": "Number of days until the exam starts. Default: 15",
+                    },
+                },
+                "required": [],
+            },
+        },
+    },
 ]
 
 TOOL_FUNCTIONS = {
@@ -172,6 +190,7 @@ TOOL_FUNCTIONS = {
     "get_recommendations": get_recommendations,
     "get_attendance_insights": get_attendance_insights,
     "get_parent_report": get_parent_report,
+    "get_exam_plan": get_exam_plan,
 }
 
 INTENT_MAP = {
@@ -184,6 +203,7 @@ INTENT_MAP = {
     "get_recommendations": "Recommendations",
     "get_attendance_insights": "Attendance Insights",
     "get_parent_report": "Parent Report",
+    "get_exam_plan": "Exam Planner",
 }
 
 
@@ -212,7 +232,7 @@ def _execute_tool(name: str, args: dict, student_id: str) -> Any:
         return {"error": f"Unknown tool: {name}"}
     if name in ("get_attendance", "get_marks", "get_fees", "get_homework",
                 "get_timetable", "get_academic_summary", "get_recommendations",
-                "get_attendance_insights", "get_parent_report"):
+                "get_attendance_insights", "get_parent_report", "get_exam_plan"):
         return func(student_id=student_id, **args)
     return func(**args)
 
