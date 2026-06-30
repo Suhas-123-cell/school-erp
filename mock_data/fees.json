@@ -1,0 +1,87 @@
+{
+  "S001": {
+    "name": "Arjun Sharma",
+    "class": "10-A",
+    "annual_fee": 50000,
+    "paid_amount": 35000,
+    "pending_amount": 15000,
+    "due_date": "2026-07-15",
+    "fee_structure": {
+      "tuition_fee": 30000,
+      "lab_fee": 5000,
+      "sports_fee": 3000,
+      "library_fee": 2000,
+      "exam_fee": 5000,
+      "transport_fee": 5000
+    },
+    "payment_history": [
+      {
+        "date": "2026-01-10",
+        "amount": 15000,
+        "type": "Tuition Fee",
+        "receipt": "RCT-001",
+        "mode": "Online",
+        "status": "paid"
+      },
+      {
+        "date": "2026-02-08",
+        "amount": 10000,
+        "type": "Lab + Sports Fee",
+        "receipt": "RCT-002",
+        "mode": "Cheque",
+        "status": "paid"
+      },
+      {
+        "date": "2026-04-05",
+        "amount": 10000,
+        "type": "Library + Exam Fee",
+        "receipt": "RCT-003",
+        "mode": "Online",
+        "status": "paid"
+      }
+    ],
+    "pending_dues": [
+      {
+        "description": "Transport Fee + Tuition Balance",
+        "amount": 15000,
+        "due_date": "2026-07-15",
+        "fine_per_day": 50
+      }
+    ]
+  },
+  "S002": {
+    "name": "Priya Nair",
+    "class": "10-A",
+    "annual_fee": 50000,
+    "paid_amount": 50000,
+    "pending_amount": 0,
+    "due_date": null,
+    "fee_structure": {
+      "tuition_fee": 30000,
+      "lab_fee": 5000,
+      "sports_fee": 3000,
+      "library_fee": 2000,
+      "exam_fee": 5000,
+      "transport_fee": 5000
+    },
+    "payment_history": [
+      {
+        "date": "2026-01-05",
+        "amount": 25000,
+        "type": "First Half",
+        "receipt": "RCT-101",
+        "mode": "Online",
+        "status": "paid"
+      },
+      {
+        "date": "2026-04-02",
+        "amount": 25000,
+        "type": "Second Half",
+        "receipt": "RCT-102",
+        "mode": "Online",
+        "status": "paid"
+      }
+    ],
+    "pending_dues": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "S001": {
+    "name": "Arjun Sharma",
+    "class": "10-A",
+    "roll_number": 12,
+    "parent": "Rajesh Sharma",
+    "parent_email": "rajesh.sharma@gmail.com",
+    "email": "arjun.sharma@school.edu",
+    "phone": "+91-9876543210",
+    "dob": "2010-03-15",
+    "admission_date": "2020-06-01",
+    "section": "A",
+    "gender": "Male"
+  },
+  "S002": {
+    "name": "Priya Nair",
+    "class": "10-A",
+    "roll_number": 18,
+    "parent": "Suresh Nair",
+    "parent_email": "suresh.nair@gmail.com",
+    "email": "priya.nair@school.edu",
+    "phone": "+91-9876543211",
+    "dob": "2010-07-22",
+    "admission_date": "2020-06-01",
+    "section": "A",
+    "gender": "Female"
+  },
+  "S003": {
+    "name": "Rohan Mehta",
+    "class": "10-B",
+    "roll_number": 5,
+    "parent": "Amit Mehta",
+    "parent_email": "amit.mehta@gmail.com",
+    "email": "rohan.mehta@school.edu",
+    "phone": "+91-9876543212",
+    "dob": "2010-11-08",
+    "admission_date": "2021-06-01",
+    "section": "B",
+    "gender": "Male"
+  }
+}

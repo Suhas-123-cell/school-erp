@@ -1,0 +1,83 @@
+{
+  "10-A": [
+    {
+      "id": "HW001",
+      "subject": "Mathematics",
+      "title": "Quadratic Equations \u2013 Chapter 5",
+      "description": "Solve problems 1\u201320 from Exercise 5.3. Show all working steps.",
+      "assigned_date": "2026-06-28",
+      "due_date": "2026-07-02",
+      "teacher": "Mr. Arun Kumar",
+      "status": "pending",
+      "priority": "high"
+    },
+    {
+      "id": "HW002",
+      "subject": "Physics",
+      "title": "Newton's Laws Lab Report",
+      "description": "Write a detailed lab report on the experiment conducted on 25th June. Include observations, calculations, and conclusions.",
+      "assigned_date": "2026-06-25",
+      "due_date": "2026-07-01",
+      "teacher": "Mrs. Sunita Verma",
+      "status": "pending",
+      "priority": "high"
+    },
+    {
+      "id": "HW003",
+      "subject": "English",
+      "title": "Essay \u2013 Climate Change and Its Impact",
+      "description": "Write a 500-word essay on 'Climate Change and Its Impact on Agriculture'. Use at least 3 references.",
+      "assigned_date": "2026-06-27",
+      "due_date": "2026-07-03",
+      "teacher": "Ms. Anita Joseph",
+      "status": "pending",
+      "priority": "medium"
+    },
+    {
+      "id": "HW004",
+      "subject": "Computer Science",
+      "title": "Python Program \u2013 Sorting Algorithms",
+      "description": "Implement Bubble Sort and Merge Sort in Python and compare their time complexities with examples.",
+      "assigned_date": "2026-06-29",
+      "due_date": "2026-07-05",
+      "teacher": "Ms. Deepa Krishnan",
+      "status": "pending",
+      "priority": "medium"
+    },
+    {
+      "id": "HW005",
+      "subject": "History",
+      "title": "Map Work \u2013 Colonial India",
+      "description": "Complete the map work on page 142. Mark all major colonial trade routes and important cities.",
+      "assigned_date": "2026-06-26",
+      "due_date": "2026-07-04",
+      "teacher": "Mr. Vijay Singh",
+      "status": "pending",
+      "priority": "low"
+    },
+    {
+      "id": "HW006",
+      "subject": "Chemistry",
+      "title": "Organic Reactions Worksheet",
+      "description": "Complete the worksheet on substitution and elimination reactions. Balance all equations.",
+      "assigned_date": "2026-06-23",
+      "due_date": "2026-06-30",
+      "teacher": "Dr. Ramesh Patel",
+      "status": "completed",
+      "priority": "high"
+    }
+  ],
+  "10-B": [
+    {
+      "id": "HW007",
+      "subject": "Mathematics",
+      "title": "Trigonometry Problems",
+      "description": "Solve Exercise 8.1 problems 1-15.",
+      "assigned_date": "2026-06-28",
+      "due_date": "2026-07-02",
+      "teacher": "Mr. Arun Kumar",
+      "status": "pending",
+      "priority": "high"
+    }
+  ]
+}

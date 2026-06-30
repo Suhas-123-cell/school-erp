@@ -1,0 +1,232 @@
+{
+  "S001": {
+    "name": "Arjun Sharma",
+    "class": "10-A",
+    "semester": "2025-2026 Odd",
+    "subjects": {
+      "Mathematics": {
+        "teacher": "Mr. Arun Kumar",
+        "mid_term": 85,
+        "final": null,
+        "unit_tests": [
+          78,
+          82,
+          80
+        ],
+        "assignments": [
+          90,
+          85,
+          88
+        ],
+        "max_marks": 100,
+        "grade": "A",
+        "remarks": "Good performance, can improve in calculus"
+      },
+      "Physics": {
+        "teacher": "Mrs. Sunita Verma",
+        "mid_term": 78,
+        "final": null,
+        "unit_tests": [
+          72,
+          75,
+          70
+        ],
+        "assignments": [
+          80,
+          76,
+          82
+        ],
+        "max_marks": 100,
+        "grade": "B+",
+        "remarks": "Needs more practice in optics"
+      },
+      "Chemistry": {
+        "teacher": "Dr. Ramesh Patel",
+        "mid_term": 82,
+        "final": null,
+        "unit_tests": [
+          80,
+          78,
+          84
+        ],
+        "assignments": [
+          85,
+          88,
+          83
+        ],
+        "max_marks": 100,
+        "grade": "A",
+        "remarks": "Excellent in organic chemistry"
+      },
+      "English": {
+        "teacher": "Ms. Anita Joseph",
+        "mid_term": 90,
+        "final": null,
+        "unit_tests": [
+          88,
+          92,
+          87
+        ],
+        "assignments": [
+          95,
+          90,
+          92
+        ],
+        "max_marks": 100,
+        "grade": "A+",
+        "remarks": "Outstanding performance"
+      },
+      "History": {
+        "teacher": "Mr. Vijay Singh",
+        "mid_term": 72,
+        "final": null,
+        "unit_tests": [
+          68,
+          70,
+          65
+        ],
+        "assignments": [
+          75,
+          72,
+          70
+        ],
+        "max_marks": 100,
+        "grade": "B",
+        "remarks": "Needs to improve memorization skills"
+      },
+      "Computer Science": {
+        "teacher": "Ms. Deepa Krishnan",
+        "mid_term": 88,
+        "final": null,
+        "unit_tests": [
+          85,
+          90,
+          87
+        ],
+        "assignments": [
+          92,
+          88,
+          91
+        ],
+        "max_marks": 100,
+        "grade": "A+",
+        "remarks": "Excellent programming skills"
+      }
+    }
+  },
+  "S002": {
+    "name": "Priya Nair",
+    "class": "10-A",
+    "semester": "2025-2026 Odd",
+    "subjects": {
+      "Mathematics": {
+        "teacher": "Mr. Arun Kumar",
+        "mid_term": 92,
+        "final": null,
+        "unit_tests": [
+          90,
+          94,
+          88
+        ],
+        "assignments": [
+          95,
+          92,
+          96
+        ],
+        "max_marks": 100,
+        "grade": "A+",
+        "remarks": "Exceptional"
+      },
+      "Physics": {
+        "teacher": "Mrs. Sunita Verma",
+        "mid_term": 89,
+        "final": null,
+        "unit_tests": [
+          86,
+          90,
+          88
+        ],
+        "assignments": [
+          92,
+          89,
+          91
+        ],
+        "max_marks": 100,
+        "grade": "A",
+        "remarks": "Very good"
+      },
+      "Chemistry": {
+        "teacher": "Dr. Ramesh Patel",
+        "mid_term": 86,
+        "final": null,
+        "unit_tests": [
+          84,
+          88,
+          85
+        ],
+        "assignments": [
+          90,
+          86,
+          88
+        ],
+        "max_marks": 100,
+        "grade": "A",
+        "remarks": "Good"
+      },
+      "English": {
+        "teacher": "Ms. Anita Joseph",
+        "mid_term": 94,
+        "final": null,
+        "unit_tests": [
+          92,
+          96,
+          93
+        ],
+        "assignments": [
+          98,
+          94,
+          96
+        ],
+        "max_marks": 100,
+        "grade": "A+",
+        "remarks": "Excellent"
+      },
+      "History": {
+        "teacher": "Mr. Vijay Singh",
+        "mid_term": 85,
+        "final": null,
+        "unit_tests": [
+          82,
+          86,
+          84
+        ],
+        "assignments": [
+          88,
+          85,
+          87
+        ],
+        "max_marks": 100,
+        "grade": "A",
+        "remarks": "Good"
+      },
+      "Computer Science": {
+        "teacher": "Ms. Deepa Krishnan",
+        "mid_term": 91,
+        "final": null,
+        "unit_tests": [
+          89,
+          93,
+          90
+        ],
+        "assignments": [
+          95,
+          91,
+          93
+        ],
+        "max_marks": 100,
+        "grade": "A+",
+        "remarks": "Excellent"
+      }
+    }
+  }
+}
