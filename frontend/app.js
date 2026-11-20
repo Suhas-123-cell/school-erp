@@ -224,12 +224,16 @@ async function sendMessage() {
     updateSessionUI();
 
     loadingEl.remove();
-    appendAIMsg(data.response, {
-      intent: data.intent,
-      tools: data.tools_used,
-      plan: data.execution_plan,
-      time: data.execution_time_ms,
-    });
+    if (data.status === 'error') {
+      appendErrorMsg(data.error_detail || data.error || 'The assistant could not finish this request.');
+    } else {
+      appendAIMsg(data.response, {
+        intent: data.intent,
+        tools: data.tools_used,
+        plan: formatToolCalls(data.tool_calls),
+        time: data.execution_time_ms,
+      });
+    }
 
     loadSessions();
 
@@ -263,7 +267,7 @@ function appendAIMsg(text, meta = {}) {
   if (meta.intent) metaHtml += `<span class="meta-intent">${escHtml(meta.intent)}</span>`;
   if (meta.tools && meta.tools.length)
     meta.tools.forEach(t => { metaHtml += `<span class="meta-tool">${escHtml(t)}</span>`; });
-  if (meta.plan) metaHtml += `<button class="plan-toggle" onclick="togglePlan(this)">show plan</button>`;
+  if (meta.plan) metaHtml += `<button class="plan-toggle" onclick="togglePlan(this)">show tool calls</button>`;
   if (meta.time != null) metaHtml += `<span class="meta-time">${meta.time.toFixed(0)} ms</span>`;
 
   row.innerHTML = `
@@ -294,13 +298,22 @@ function appendErrorMsg(msg) {
   messagesEl.appendChild(row);
 }
 
-// ── Plan toggle ───────────────────────────────────────────────────────────
+// One line per tool call the agent actually made, with its validated arguments.
+function formatToolCalls(calls) {
+  if (!calls || !calls.length) return '';
+  return calls.map((c, i) => {
+    const note = c.error ? ` -> ${c.status}: ${c.error}` : '';
+    return `${i + 1}. ${c.name}(${JSON.stringify(c.arguments)})${note}`;
+  }).join('\n');
+}
+
+// ── Tool call toggle ───────────────────────────────────────────────────────────
 function togglePlan(btn) {
   const planBox = btn.closest('.msg-row').querySelector('.plan-box');
   if (!planBox) return;
   const shown = planBox.style.display !== 'none';
   planBox.style.display = shown ? 'none' : 'block';
-  btn.textContent = shown ? 'show plan' : 'hide plan';
+  btn.textContent = shown ? 'show tool calls' : 'hide tool calls';
 }
 
 // ── Utils ─────────────────────────────────────────────────────────────────

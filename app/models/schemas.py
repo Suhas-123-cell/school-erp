@@ -9,13 +9,23 @@ class ChatRequest(BaseModel):
     session_id: Optional[str] = Field(default=None, description="Session ID for conversation continuity")
 
 
+class ToolCallRecord(BaseModel):
+    """A tool call the agent actually made, with the arguments after validation."""
+
+    name: str
+    arguments: Dict[str, Any] = {}
+    status: str = Field(description="ok, tool_error, invalid_arguments or unknown_tool")
+    error: Optional[str] = None
+
+
 class ChatResponse(BaseModel):
     intent: str
     response: str
-    status: str
+    status: str = Field(description="Fetched/Generated/Calculated/Answered on success, 'error' on failure")
     tools_used: List[str] = []
-    execution_plan: str = ""
-    data: Optional[Dict[str, Any]] = None
+    tool_calls: List[ToolCallRecord] = []
+    error: Optional[str] = Field(default=None, description="Error code when status is 'error'")
+    error_detail: Optional[str] = None
     session_id: str
     execution_time_ms: float = 0.0
 

@@ -1,28 +1,37 @@
+import json
 import time
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
-from fastapi.responses import JSONResponse
+from fastapi.concurrency import run_in_threadpool
 
-from app.models.schemas import ChatRequest, ChatResponse, ChatHistoryResponse, HistoryMessage
-from app.agents.erp_agent import run_agent
+from app.agents.erp_agent import AgentConfigError, LLMUnavailableError, run_agent
 from app.memory import conversation_store as mem
+from app.models.schemas import ChatHistoryResponse, ChatRequest, ChatResponse, HistoryMessage
+from app.paths import MOCK_DATA_DIR
 from app.utils.logger import logger
-
-import json
 
 router = APIRouter(prefix="/chat", tags=["Chat"])
 
+_STATUS_BY_INTENT = {
+    "Attendance": "Fetched",
+    "Marks & Grades": "Fetched",
+    "Fee Status": "Fetched",
+    "Homework": "Fetched",
+    "Timetable": "Fetched",
+    "Academic Summary": "Generated",
+    "Recommendations": "Generated",
+    "Attendance Insights": "Calculated",
+    "Parent Report": "Generated",
+    "Exam Planner": "Generated",
+    "General Query": "Answered",
+}
 
-def _get_student_info(student_id: str) -> dict:
-    import json
-    from pathlib import Path
-    try:
-        with open("mock_data/students.json") as f:
-            students = json.load(f)
-        return students.get(student_id, {"name": "Student", "class": "10-A"})
-    except Exception:
-        return {"name": "Student", "class": "10-A"}
+
+def _get_student_info(student_id: str) -> Optional[dict]:
+    """Return the student's record, or None if the ID is unknown."""
+    with open(MOCK_DATA_DIR / "students.json") as f:
+        return json.load(f).get(student_id)
 
 
 @router.post("", response_model=ChatResponse)
@@ -32,56 +41,49 @@ async def chat(request: ChatRequest):
 
     student_id = request.student_id or "S001"
     student_info = _get_student_info(student_id)
-    if "name" not in student_info:
+    if student_info is None:
         raise HTTPException(status_code=404, detail=f"Student ID {student_id} not found")
 
     session_id = request.session_id or mem.generate_session_id()
     start = time.time()
 
+    # run_agent is synchronous (blocking HTTP + SQLite), so keep it off the event loop.
     try:
-        response_text, tools_used, intent = run_agent(
+        result = await run_in_threadpool(
+            run_agent,
             message=request.message,
             student_id=student_id,
             session_id=session_id,
             student_name=student_info.get("name", "Student"),
             student_class=student_info.get("class", "10-A"),
         )
-    except Exception as e:
-        logger.error(f"Agent error: {e}")
-        raise HTTPException(status_code=500, detail=f"AI agent error: {str(e)}")
+    except AgentConfigError as e:
+        logger.error(f"Agent not configured: {e}")
+        raise HTTPException(status_code=503, detail=str(e))
+    except LLMUnavailableError as e:
+        raise HTTPException(status_code=502, detail=str(e))
 
-    exec_ms = round((time.time() - start) * 1000, 2)
-
-    from app.agents.erp_agent import _build_execution_plan
-    plan = _build_execution_plan(request.message, intent, tools_used)
-
-    status_map = {
-        "Attendance": "Fetched",
-        "Marks & Grades": "Fetched",
-        "Fee Status": "Fetched",
-        "Homework": "Fetched",
-        "Timetable": "Fetched",
-        "Academic Summary": "Generated",
-        "Recommendations": "Generated",
-        "Attendance Insights": "Calculated",
-        "Parent Report": "Generated",
-        "General Query": "Answered",
-    }
-    base_intent = intent.split(" + ")[0] if " + " in intent else intent
-    status = status_map.get(base_intent, "Completed")
-
-    mem.save_message(session_id, student_id, "user", request.message)
-    mem.save_message(session_id, student_id, "assistant", response_text,
-                     intent=intent, tools_used=tools_used)
+    if result.status == "ok":
+        await run_in_threadpool(
+            mem.save_turn, session_id, student_id, result.new_messages,
+            result.intent, result.tools_used,
+        )
+        base_intent = result.intent.split(" + ")[0]
+        status = _STATUS_BY_INTENT.get(base_intent, "Completed")
+    else:
+        # A failed turn is not stored, so the next turn does not replay it.
+        status = "error"
 
     return ChatResponse(
-        intent=intent,
-        response=response_text,
+        intent=result.intent,
+        response=result.response,
         status=status,
-        tools_used=tools_used,
-        execution_plan=plan,
+        tools_used=result.tools_used,
+        tool_calls=result.tool_calls,
+        error=result.error,
+        error_detail=result.error_detail,
         session_id=session_id,
-        execution_time_ms=exec_ms,
+        execution_time_ms=round((time.time() - start) * 1000, 2),
     )
 
 
