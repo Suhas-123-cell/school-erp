@@ -1,8 +1,8 @@
 import json
-from pathlib import Path
+from app.paths import MOCK_DATA_DIR
 from typing import Dict, Any
 
-DATA_PATH = Path("mock_data")
+DATA_PATH = MOCK_DATA_DIR
 
 
 def _load() -> dict:

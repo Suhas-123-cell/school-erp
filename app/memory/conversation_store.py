@@ -2,10 +2,9 @@ import json
 import sqlite3
 import uuid
 from datetime import datetime
-from pathlib import Path
 from typing import List, Dict, Any, Optional
 
-DB_PATH = Path("logs/conversations.db")
+from app.paths import DB_PATH
 
 
 def _get_conn() -> sqlite3.Connection:

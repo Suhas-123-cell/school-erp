@@ -1,6 +1,5 @@
 import os
 from contextlib import asynccontextmanager
-from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,6 +12,7 @@ load_dotenv()
 from app.api.chat import router as chat_router
 from app.api.students import router as students_router
 from app.memory import conversation_store as mem
+from app.paths import FRONTEND_DIR
 from app.utils.logger import logger
 
 
@@ -52,7 +52,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 @app.get("/", tags=["Frontend"], include_in_schema=False)
 async def serve_frontend():
-    return FileResponse(Path("frontend/index.html"))
+    return FileResponse(FRONTEND_DIR / "index.html")
 
 
 @app.get("/health", tags=["Health"])
@@ -63,4 +63,4 @@ async def health():
 app.include_router(chat_router)
 app.include_router(students_router)
 
-app.mount("/", StaticFiles(directory="frontend"), name="static")
+app.mount("/", StaticFiles(directory=str(FRONTEND_DIR)), name="static")

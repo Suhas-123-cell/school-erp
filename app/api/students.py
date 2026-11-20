@@ -1,13 +1,14 @@
 import json
 from datetime import date
-from pathlib import Path
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
+from app.paths import MOCK_DATA_DIR
+
 router = APIRouter(prefix="/students", tags=["Students"])
-DATA_PATH = Path("mock_data/students.json")
+DATA_PATH = MOCK_DATA_DIR / "students.json"
 
 
 class StudentIn(BaseModel):

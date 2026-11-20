@@ -1,12 +1,13 @@
 import json
 import time
-from pathlib import Path
 from loguru import logger
 
-Path("logs").mkdir(exist_ok=True)
+from app.paths import LOGS_DIR
+
+LOGS_DIR.mkdir(exist_ok=True)
 
 logger.add(
-    "logs/erp_assistant.log",
+    str(LOGS_DIR / "erp_assistant.log"),
     format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}",
     rotation="10 MB",
     retention="30 days",
@@ -14,7 +15,7 @@ logger.add(
 )
 
 logger.add(
-    "logs/erp_errors.log",
+    str(LOGS_DIR / "erp_errors.log"),
     format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}",
     rotation="5 MB",
     retention="30 days",

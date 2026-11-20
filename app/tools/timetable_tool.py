@@ -1,10 +1,10 @@
 import json
 from datetime import datetime, timedelta
-from pathlib import Path
+from app.paths import MOCK_DATA_DIR
 from typing import Dict, Any, Optional
 
-DATA_PATH = Path("mock_data")
-STUDENTS_PATH = Path("mock_data/students.json")
+DATA_PATH = MOCK_DATA_DIR
+STUDENTS_PATH = MOCK_DATA_DIR / "students.json"
 
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 

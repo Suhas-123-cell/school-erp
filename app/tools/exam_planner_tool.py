@@ -1,10 +1,10 @@
 """Exam Preparation Planner — generates a day-by-day study schedule."""
 import json
 from datetime import datetime, timedelta
-from pathlib import Path
+from app.paths import MOCK_DATA_DIR
 from typing import Dict, Any
 
-DATA_PATH = Path("mock_data")
+DATA_PATH = MOCK_DATA_DIR
 
 
 def _load(name: str) -> dict:
