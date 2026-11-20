@@ -1,4 +1,4 @@
-"""Service layer for analytics, summaries, and AI recommendations."""
+"""Service layer for analytics, summaries, and rule-based recommendations."""
 from app.tools.analytics_tool import (
     get_academic_summary,
     get_recommendations,

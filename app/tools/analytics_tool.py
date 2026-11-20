@@ -186,6 +186,6 @@ def get_parent_report(student_id: str) -> Dict[str, Any]:
             "due_date": fees_data.get("due_date"),
             "status": "Cleared" if fees_data.get("pending_amount", 1) == 0 else "Pending",
         },
-        "ai_suggestions": recommendations.get("recommendations", [])[:3],
+        "suggestions": recommendations.get("recommendations", [])[:3],
         "priority_actions": recommendations.get("priority_actions", []),
     }
