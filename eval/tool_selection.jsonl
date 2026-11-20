@@ -1,0 +1,27 @@
+{"id": "att-month", "query": "Show my attendance for this month.", "expected_tools": ["get_attendance"]}
+{"id": "att-missed", "query": "How many classes did I miss?", "expected_tools": ["get_attendance"]}
+{"id": "att-today", "query": "Was I marked present today?", "expected_tools": ["get_attendance"], "expected_args": {"get_attendance": {"period": "today"}}}
+{"id": "att-target", "query": "Can I still reach 85% attendance this semester?", "expected_tools": ["get_attendance_insights"], "expected_args": {"get_attendance_insights": {"target_percentage": 85}}}
+{"id": "att-maintain", "query": "Can I maintain 90% attendance?", "expected_tools": ["get_attendance_insights"]}
+{"id": "marks-math", "query": "Show my Mathematics marks.", "expected_tools": ["get_marks"], "expected_args": {"get_marks": {"subject": "Mathematics"}}}
+{"id": "marks-best", "query": "Which subject has my highest marks?", "expected_tools": ["get_marks"]}
+{"id": "marks-avg", "query": "What is my average score?", "expected_tools": ["get_marks"]}
+{"id": "marks-physics", "query": "How did I do in Physics?", "expected_tools": ["get_marks"], "expected_args": {"get_marks": {"subject": "Physics"}}}
+{"id": "fees-pending", "query": "How much fee is pending?", "expected_tools": ["get_fees"]}
+{"id": "fees-history", "query": "Show my payment history.", "expected_tools": ["get_fees"]}
+{"id": "fees-paid", "query": "Have I paid this term's fees?", "expected_tools": ["get_fees"]}
+{"id": "hw-pending", "query": "What homework is pending?", "expected_tools": ["get_homework"]}
+{"id": "hw-tomorrow", "query": "What assignments are due tomorrow?", "expected_tools": ["get_homework"], "expected_args": {"get_homework": {"filter_by": "tomorrow"}}}
+{"id": "hw-chem", "query": "Do I have any Chemistry homework?", "expected_tools": ["get_homework"], "expected_args": {"get_homework": {"subject": "Chemistry"}}}
+{"id": "tt-tomorrow", "query": "Show tomorrow's timetable.", "expected_tools": ["get_timetable"]}
+{"id": "tt-monday", "query": "What classes do I have on Monday?", "expected_tools": ["get_timetable"], "expected_args": {"get_timetable": {"day": "Monday"}}}
+{"id": "tt-subject", "query": "When is my Mathematics class?", "expected_tools": ["get_timetable"], "expected_args": {"get_timetable": {"subject": "Mathematics"}}}
+{"id": "summary", "query": "Summarize my overall academic performance this semester.", "expected_tools": ["get_academic_summary"]}
+{"id": "improve", "query": "How can I improve my grades?", "expected_tools": ["get_recommendations"]}
+{"id": "parent-report", "query": "Generate a parent progress report.", "expected_tools": ["get_parent_report"]}
+{"id": "exam-plan", "query": "My exams start in 10 days, create a study plan for me.", "expected_tools": ["get_exam_plan"], "expected_args": {"get_exam_plan": {"days_until_exam": 10}}}
+{"id": "multi-att-marks", "query": "Show my attendance and my marks.", "expected_tools": ["get_attendance", "get_marks"]}
+{"id": "multi-marks-fees", "query": "What are my marks, and do I have any pending fees?", "expected_tools": ["get_marks", "get_fees"]}
+{"id": "multi-hw-tt", "query": "What homework is pending and what is on my timetable tomorrow?", "expected_tools": ["get_homework", "get_timetable"]}
+{"id": "none-greeting", "query": "Hello, how are you?", "expected_tools": []}
+{"id": "none-offtopic", "query": "Write me a poem about the ocean.", "expected_tools": []}
